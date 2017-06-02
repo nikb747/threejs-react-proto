@@ -236,6 +236,7 @@
     "reselect": "2.5.4",
     "sanitize.css": "4.1.0",
     "styled-components": "1.1.2",
+    "three": "^0.85.2",
     "warning": "3.0.0",
     "whatwg-fetch": "2.0.1"
   },
