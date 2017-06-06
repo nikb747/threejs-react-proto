@@ -10,3 +10,19 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+
+export const VACANT = 'vacant';
+export const BUILDING = 'building';
+export const STREET = 'street';
+
+export const NORTH = {x: 0, y: -1};
+export const EAST = {x: 1, y: 0};
+export const SOUTH = {x: 0, y: 1};
+export const WEST = {x: -1, y: 0};
+export const NONE = {x: 0, y:0};
+
+export const GRID_WIDTH = 20;
+export const GRID_LENGTH = 20;
+export const GLOBAL_Y_OFFSET = -10;
+export const GLOBAL_X_OFFSET = -10;
+export const UNIT_SCALE = 1;
