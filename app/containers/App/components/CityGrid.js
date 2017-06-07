@@ -26,7 +26,7 @@ class CityGrid extends React.Component {
       let blocks = this.props.grid[x];
       for (var y = 0; y < blocks.length; y++) {
         if (blocks[y].lotType === STREET) {
-          streets.push(<Street x={x} y={y} key={`${x}-${y}`}/>)
+          streets.push(<Street x={x} y={y} key={`${x}-${y}`} color={0x666666}/>)
         }
       }
     }
@@ -48,6 +48,7 @@ class CityGrid extends React.Component {
     return (<group>
         {this.renderLots()}
         {this.renderBuildings()}
+        {this.renderStreets()}
       </group>);
   }
 }

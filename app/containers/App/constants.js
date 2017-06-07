@@ -21,8 +21,46 @@ export const SOUTH = {x: 0, y: 1};
 export const WEST = {x: -1, y: 0};
 export const NONE = {x: 0, y:0};
 
-export const GRID_WIDTH = 20;
+export const FACING_NORTH = {
+  direction: NORTH,
+  opposite: SOUTH,
+  left: WEST,
+  right: EAST
+}
+export const FACING_SOUTH = {
+  direction: SOUTH,
+  opposite: NORTH,
+  left: EAST,
+  right: WEST
+}
+export const FACING_EAST = {
+  direction: EAST,
+  opposite: WEST,
+  left: NORTH,
+  right: SOUTH
+}
+export const FACING_WEST = {
+  direction: WEST,
+  opposite: EAST,
+  left: SOUTH,
+  right: NORTH
+}
+export const FACING_NONE = {
+  direction: NONE,
+  opposite: NONE,
+  left: NONE,
+  right: NONE
+}
+export const FACINGS = [FACING_NORTH, FACING_EAST, FACING_SOUTH, FACING_WEST];
+export const DIRECTIONS = [NORTH, EAST, SOUTH, WEST];
+
+export const GRID_WIDTH = 24;
 export const GRID_LENGTH = 20;
 export const GLOBAL_Y_OFFSET = -10;
-export const GLOBAL_X_OFFSET = -10;
+export const GLOBAL_X_OFFSET = -12;
 export const UNIT_SCALE = 1;
+
+export const BUILDING_COLORS = [
+  0x974713, 0xE47833, 0xFF8D45,
+  0x039398, 0x33DEE4
+];

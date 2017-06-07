@@ -16,7 +16,7 @@ const Street = (props: {x: number, y: number, color: number}) => {
       receiveShadow
       position={position}>
       <boxGeometry width={actualSize} height={actualHeight} depth={actualSize}/>
-      <meshPhongMaterial color={props.color} />
+      <meshLambertMaterial color={props.color} />
     </mesh>
   )
 }

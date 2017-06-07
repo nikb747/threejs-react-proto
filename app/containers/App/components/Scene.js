@@ -30,13 +30,13 @@ class Scene extends React.Component {
         clearColor={this.fog.color}
         shadowMapEnabled
         >
-        <scene fog={this.fog}>
+        <scene >
           <ambientLight
-            color={0x666666}
+            color={0xaaaaaa}
           />
           <directionalLight
             color={0xffffff}
-            intensity={1.75}
+            intensity={0.9}
 
             castShadow
 

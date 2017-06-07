@@ -1,4 +1,5 @@
-import {GRID_LENGTH, GRID_WIDTH, NONE, VACANT} from './constants'
+
+import {GRID_LENGTH, GRID_WIDTH, FACING_NONE, BUILDING, VACANT} from './constants'
 
 
 export const initializeCityGrid = () => {
@@ -15,8 +16,8 @@ const emptyGrid = (width, height) => {
       grid[x][y] = {
         lotType: VACANT,
         connectedLots: [{x,y}],
-        facing: NONE,
-        color: 0x66dd66,
+        facing: FACING_NONE,
+        color: 0x659D32,
         currentHeight: 0.1,
         name: '',
         targetHeight: 0.1

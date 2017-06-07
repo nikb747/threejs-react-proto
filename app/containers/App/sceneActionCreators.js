@@ -3,6 +3,7 @@ import {
   INCREASE_BUILDING_TARGET_HEIGHT,
   PROGRESS_TIME,
   PLACE_BUILDING,
+  PLACE_STREET,
   UPDATE_EVENT_STATUS} from './sceneActions';
 
 export function updateEventStatus(value: number) {
@@ -34,5 +35,12 @@ export function placeNewBuilding(x: number, y: number, building: {
   return {
     type: PLACE_BUILDING,
     payload: {x, y, ...building}
+  }
+}
+
+export function placeStreet(x: number, y: number, facing: Object) {
+  return {
+    type: PLACE_STREET,
+    payload: {x, y, facing}
   }
 }
