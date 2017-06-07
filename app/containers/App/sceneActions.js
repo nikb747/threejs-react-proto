@@ -1,5 +1,7 @@
 export const PROGRESS_TIME = 'PROGRESS_TIME';
 export const UPDATE_EVENT_STATUS = 'UPDATE_EVENT_STATUS';
+export const RESET = 'RESET';
+
 
 export const PLACE_STREET = 'PLACE_STREET';
 export const PLACE_BUILDING = 'PLACE_BUILDING';

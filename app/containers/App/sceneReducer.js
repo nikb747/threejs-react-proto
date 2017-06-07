@@ -4,16 +4,17 @@ import {
   PROGRESS_TIME,
   PLACE_BUILDING,
   PLACE_STREET,
+  RESET,
   UPDATE_EVENT_STATUS} from './sceneActions'
 import {initializeCityGrid} from './cityGrid';
 import {GRID_WIDTH, GRID_LENGTH, BUILDING, STREET, VACANT} from './constants'
 const initialState = {
   ticks: 0,
-  nextEventAt: 40,
+  nextEventAt: 10,
   city: initializeCityGrid(),
   camera : {
     rotation: {x : -55 * Math.PI / 180, y: 0, z:0},
-    position: {x: 0, y:10, z:10}
+    position: {x: 0, y:20, z:15}
   }
 }
 
@@ -33,6 +34,8 @@ function sceneReducer(state = initialState, action) {
 
     case PLACE_STREET:
       return Object.assign({}, state, {city: placeStreet(action.payload, state.city)});
+    case RESET:
+      return Object.assign({}, initialState);
     default:
       return state;
   }

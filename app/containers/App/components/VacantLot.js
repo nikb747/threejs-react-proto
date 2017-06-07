@@ -16,7 +16,7 @@ const VacantLot = (props: {x: number, y: number, color: number}) => {
       receiveShadow
       position={position}>
       <boxGeometry width={actualSize} height={actualHeight} depth={actualSize}/>
-      <meshLambertMaterial color={props.color} />
+      <meshStandardMaterial color={props.color}/>
     </mesh>
   )
 }

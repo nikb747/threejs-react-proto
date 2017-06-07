@@ -8,6 +8,7 @@ import {
   progressTime,
   placeNewBuilding,
   placeStreet,
+  reset,
   updateEventStatus} from '../sceneActionCreators'
 import {
   FACINGS,
@@ -26,7 +27,7 @@ class Ticker extends React.Component {
       if (this.props.ticks < 500) {
         this.props.handleFrameUpdate();
       } else {
-        this.noMoreUpdates = true;
+        this.props.handleReset();
       }
     }
   }
@@ -44,6 +45,7 @@ class Ticker extends React.Component {
       let facingIndex = parseInt(Math.random() * FACINGS.length, 10);
       let facing = FACINGS[facingIndex];
       let placeable = false;
+      let smallBuilding = parseInt(Math.random() * 5) === 0;
       for (var i = 0; i < FACINGS.length; i++) {
         let faceToTry = FACINGS[(facingIndex + i) % FACINGS.length];
         let tryX = x + faceToTry.direction.x;
@@ -75,43 +77,45 @@ class Ticker extends React.Component {
       }
 
       let goodPositions = [{x, y}];
-      let startFromLeftPositions = [{x, y}];
-      let startFromRightPositions = [{x, y}];
-      let startFromBackPositions = [{x, y}];
-      let backPos = this.applyDirection({x, y}, facing.opposite);
-      let leftPos = this.applyDirection({x, y}, facing.left);
-      let rightPos = this.applyDirection({x, y}, facing.right);
-      if (this.inBounds(rightPos) && this.props.grid[rightPos.x][rightPos.y].lotType === VACANT) {
-        startFromRightPositions.push(rightPos);
-        let posBackRight = this.applyDirection(rightPos, facing.opposite);
-        if (this.inBounds(posBackRight) && this.inBounds(backPos) &&
-            this.props.grid[posBackRight.x][posBackRight.y].lotType === VACANT &&
-            this.props.grid[backPos.x][backPos.y].lotType === VACANT) {
-              startFromRightPositions.push(posBackRight);
-              startFromRightPositions.push(backPos);
-            }
-      }
-      if (this.inBounds(leftPos) && this.props.grid[leftPos.x][leftPos.y].lotType === VACANT) {
-        startFromLeftPositions.push(leftPos);
-        let posBackLeft = this.applyDirection(leftPos, facing.opposite);
-        if (this.inBounds(posBackLeft) && this.inBounds(backPos) &&
-            this.props.grid[posBackLeft.x][posBackLeft.y].lotType === VACANT &&
-            this.props.grid[backPos.x][backPos.y].lotType === VACANT) {
-              startFromLeftPositions.push(posBackLeft);
-              startFromLeftPositions.push(backPos);
-            }
-      }
-      if (this.inBounds(backPos) && this.props.grid[backPos.x][backPos.y].lotType === VACANT) {
-        startFromBackPositions.push(backPos);
-      }
-      if (startFromBackPositions.length > goodPositions.length) {
-        goodPositions = startFromBackPositions;
-      }
-      if (startFromLeftPositions.length > goodPositions.length) {
-        goodPositions = startFromLeftPositions;
-      }
-      if (startFromRightPositions.length > goodPositions.length) {
-        goodPositions = startFromRightPositions;
+      if (!smallBuilding) {
+        let startFromLeftPositions = [{x, y}];
+        let startFromRightPositions = [{x, y}];
+        let startFromBackPositions = [{x, y}];
+        let backPos = this.applyDirection({x, y}, facing.opposite);
+        let leftPos = this.applyDirection({x, y}, facing.left);
+        let rightPos = this.applyDirection({x, y}, facing.right);
+        if (this.inBounds(rightPos) && this.props.grid[rightPos.x][rightPos.y].lotType === VACANT) {
+          startFromRightPositions.push(rightPos);
+          let posBackRight = this.applyDirection(rightPos, facing.opposite);
+          if (this.inBounds(posBackRight) && this.inBounds(backPos) &&
+              this.props.grid[posBackRight.x][posBackRight.y].lotType === VACANT &&
+              this.props.grid[backPos.x][backPos.y].lotType === VACANT) {
+                startFromRightPositions.push(posBackRight);
+                startFromRightPositions.push(backPos);
+              }
+        }
+        if (this.inBounds(leftPos) && this.props.grid[leftPos.x][leftPos.y].lotType === VACANT) {
+          startFromLeftPositions.push(leftPos);
+          let posBackLeft = this.applyDirection(leftPos, facing.opposite);
+          if (this.inBounds(posBackLeft) && this.inBounds(backPos) &&
+              this.props.grid[posBackLeft.x][posBackLeft.y].lotType === VACANT &&
+              this.props.grid[backPos.x][backPos.y].lotType === VACANT) {
+                startFromLeftPositions.push(posBackLeft);
+                startFromLeftPositions.push(backPos);
+              }
+        }
+        if (this.inBounds(backPos) && this.props.grid[backPos.x][backPos.y].lotType === VACANT) {
+          startFromBackPositions.push(backPos);
+        }
+        if (startFromBackPositions.length > goodPositions.length) {
+          goodPositions = startFromBackPositions;
+        }
+        if (startFromLeftPositions.length > goodPositions.length) {
+          goodPositions = startFromLeftPositions;
+        }
+        if (startFromRightPositions.length > goodPositions.length) {
+          goodPositions = startFromRightPositions;
+        }
       }
 
       let newBuilding = {
@@ -162,6 +166,9 @@ const mapDispatchToProps = (dispatch: Function) => ({
   },
   handlePlaceStreet(x: number, y: number, facing: Object) {
     dispatch(placeStreet(x,y, facing));
+  },
+  handleReset() {
+    dispatch(reset());
   }
 });
 

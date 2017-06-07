@@ -54,10 +54,10 @@ export const FACING_NONE = {
 export const FACINGS = [FACING_NORTH, FACING_EAST, FACING_SOUTH, FACING_WEST];
 export const DIRECTIONS = [NORTH, EAST, SOUTH, WEST];
 
-export const GRID_WIDTH = 24;
+export const GRID_WIDTH = 40;
 export const GRID_LENGTH = 20;
-export const GLOBAL_Y_OFFSET = -10;
-export const GLOBAL_X_OFFSET = -12;
+export const GLOBAL_Y_OFFSET = -8;
+export const GLOBAL_X_OFFSET = -20;
 export const UNIT_SCALE = 1;
 
 export const BUILDING_COLORS = [

@@ -4,6 +4,7 @@ import {
   PROGRESS_TIME,
   PLACE_BUILDING,
   PLACE_STREET,
+  RESET,
   UPDATE_EVENT_STATUS} from './sceneActions';
 
 export function updateEventStatus(value: number) {
@@ -42,5 +43,11 @@ export function placeStreet(x: number, y: number, facing: Object) {
   return {
     type: PLACE_STREET,
     payload: {x, y, facing}
+  }
+}
+
+export function reset() {
+  return {
+    type: RESET
   }
 }
