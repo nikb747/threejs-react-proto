@@ -2,12 +2,28 @@ import React from 'react';
 import React3 from 'react-three-renderer';
 import {connect} from 'react-redux';
 import * as THREE from 'three';
-import CityGrid from './CityGrid';
+import Doorway from './Doorway';
+import Floor from './Floor';
+import Oreo from './Oreo';
 import {GLOBAL_Y_OFFSET, GLOBAL_X_OFFSET} from '../constants';
 
 class Scene extends React.Component {
   fog = new THREE.Fog(0x001525, 10, 40);
-
+  renderDoors() {
+    let doors = [];
+    for (let i = 0; i < this.props.doors.length; i += 1) {
+      let door = this.props.doors[i];
+      doors.push(<Doorway
+        key={i}
+        position={{x:(i + 2) * 5, y:5}}
+        panels={door.panels}
+        color={door.color}
+        middleBarAt={door.middleBarAt}
+        currentDoorAngle={this.props.currentDoorAngle}
+        targetDoorAngle={this.props.targetDoorAngle}/>)
+    }
+    return doors;
+  }
   render() {
     const cameraPosition = new THREE.Vector3(
       this.props.camera.position.x,
@@ -109,17 +125,57 @@ class Scene extends React.Component {
             position={cameraPosition}
             rotation={cameraRotation}
           />
-          <CityGrid grid={this.props.city.grid} />
+          {this.renderDoors()}
+          <Floor/>
         </scene>
       </React3>
     );
   }
 }
 
+// <Doorway
+//   position={{x:5, y:5}}
+//   panels={0}
+//   color={0x7f8888}
+//   currentDoorAngle={this.props.currentDoorAngle}
+//   targetDoorAngle={this.props.targetDoorAngle}/>
+// <Doorway
+//   position={{x:10, y:5}}
+//   panels={0}
+//   color={0x7f8888}
+//   currentDoorAngle={this.props.currentDoorAngle}
+//   targetDoorAngle={this.props.targetDoorAngle}/>
+// <Doorway
+//   position={{x:15, y:5}}
+//   panels={1}
+//   color={0x887f88}
+//   currentDoorAngle={this.props.currentDoorAngle}
+//   targetDoorAngle={this.props.targetDoorAngle}/>
+// <Doorway
+//   position={{x:20, y:5}}
+//   panels={2}
+//   color={0x88887f}
+//   currentDoorAngle={this.props.currentDoorAngle}
+//   targetDoorAngle={this.props.targetDoorAngle}/>
+// <Doorway
+//   position={{x:25, y:5}}
+//   panels={2}
+//   color={0x88887f}
+//   currentDoorAngle={this.props.currentDoorAngle}
+//   targetDoorAngle={this.props.targetDoorAngle}/>
+// <Doorway
+//   position={{x:30, y:5}}
+//   panels={2}
+//   color={0x88887f}
+//   currentDoorAngle={this.props.currentDoorAngle}
+//   targetDoorAngle={this.props.targetDoorAngle}/>
+
 const mapStateToProps = (state) => {
   return {
-    city: state.get('scene').city,
-    camera: state.get('scene').camera
+    camera: state.get('scene').camera,
+    currentDoorAngle: state.get('scene').currentDoorAngle,
+    targetDoorAngle: state.get('scene').targetDoorAngle,
+    doors: state.get('scene').doors
   }
 }
 
